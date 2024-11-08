@@ -5,7 +5,7 @@ import { Construct } from "constructs";
 import path from "path";
 import * as iam from "aws-cdk-lib/aws-iam";
 interface LambdaStackProps extends cdk.StackProps {
-  usersTable: Table;
+  imagesTable: Table;
 }
 
 export class ComputeStack extends cdk.Stack {
@@ -17,7 +17,7 @@ export class ComputeStack extends cdk.Stack {
       handler: "handler",
       memorySize: 128,
     });
-    props.usersTable.grantReadData(this.putEventLambda);
+    props.imagesTable.grantReadData(this.putEventLambda);
     // Give PutEventLambda permission
     this.putEventLambda.addToRolePolicy(
       new iam.PolicyStatement({
